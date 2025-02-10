@@ -1,11 +1,12 @@
 from crewai import Task
-import agent  # Import agents from agent.py
+# import agent  # Import agents from agent.py
+from . import agent
 from dotenv import load_dotenv  # Import load_dotenv for environment variables
 import yaml
 import os
 from pydantic import BaseModel, Field
 from typing import List
-from output_schema import ContentOutput, SocialMediaPost
+
 
 
 # Load environment variables from .env file
