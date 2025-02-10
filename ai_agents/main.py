@@ -1,7 +1,9 @@
 from dotenv import load_dotenv
 import os
-from agent import agents
-from task import create_tasks, task_config
+# from agent import agents
+# from task import create_tasks, task_config
+from . import agent
+from . import task
 from crewai import Crew, Process
 from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
