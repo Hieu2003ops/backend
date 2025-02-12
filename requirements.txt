@@ -206,7 +206,6 @@ streamlit
 sympy
 tabulate
 tenacity
-tiktoken
 tokenizers
 toml
 tomli
