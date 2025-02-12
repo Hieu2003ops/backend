@@ -1,7 +1,5 @@
 from dotenv import load_dotenv
 import os
-# from agent import agents
-# from task import create_tasks, task_config
 from . import agent
 from . import task
 from crewai import Crew, Process
@@ -25,14 +23,14 @@ groq_llm = ChatGroq(model="llama-3.3-70b-versatile", api_key=groq_api_key, tempe
 
 # Function to run CrewAI pipeline
 def run_crewai_pipeline(topic):
-    tasks = create_tasks(task_config)  # Ensure tasks are initialized
+    tasks = task.create_tasks(task.task_config)  # Ensure tasks are initialized
 
     content_creation_crew = Crew(
         agents=[
-            agents["research_specialist_agent"],
-            agents["blog_writer_agent"],
-            agents["content_editor_agent"],
-            agents["quality_reviewer_agent"]
+            agent.agents["research_specialist_agent"],
+            agent.agents["blog_writer_agent"],
+            agent.agents["content_editor_agent"],
+            agent.agents["quality_reviewer_agent"]
         ],
         tasks=tasks,
         manager_llm=llm,
@@ -43,15 +41,15 @@ def run_crewai_pipeline(topic):
     # Run the pipeline
     result = content_creation_crew.kickoff(inputs={'topic': topic})
 
-    # Process result
-    markdown_result = f"# CrewAI Output\n\n{str(result)}"
+    # Process result into Markdown format
+    markdown_result = f"# CrewAI Output\n\n{result}"
 
-    # Save output to Markdown file
-    output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pipeline_result.md")
-    with open(output_path, "w", encoding="utf-8") as md_file:
+    # Save output to Markdown file directly in the current directory
+    output_file = "pipeline_result.md"
+    with open(output_file, "w", encoding="utf-8") as md_file:
         md_file.write(markdown_result)
 
-    return markdown_result, output_path
+    return markdown_result, output_file
 
 # Test if running directly
 if __name__ == "__main__":
