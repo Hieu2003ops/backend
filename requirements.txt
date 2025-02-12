@@ -207,7 +207,6 @@ sympy
 tabulate
 tenacity
 tokenizers
-toml
 tomli
 tomli_w
 tornado
